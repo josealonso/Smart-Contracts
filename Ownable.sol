@@ -1,11 +1,11 @@
 pragma solidity ^0.4.24;
 
-contract Ownable {
+contract Ownable {  // Gestiona la propiedad de los contratos que lo hereden
  
-  address private owner;
+  address internal owner;   // "internal" equivale al "protected" de un lenguaje normal
   
   constructor() public {
-      owner = msg.sender;
+      owner = msg.sender;   // Es el propietario siempre el que ejecuta la transacción de despliegur del contrato
   }   
   
   modifier isOwner() {
@@ -13,3 +13,4 @@ contract Ownable {
       _;
   }
 }
+
