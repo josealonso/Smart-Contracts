@@ -24,9 +24,15 @@ contract MessageStore is Ownable {  // Herencia en Solidity: Ownable es la clase
         return getBalance() / 1e18;
     }
     
-    function transfer(uint amount) public isOwner {   // Función para enviar divisas al propietario
+    function transfer(uint amount) public isOwner {     // Solo puede ser ejecutada por el propietario
         require(address(this).balance >= amount);
-        owner.transfer(amount);
+        owner.transfer(amount);       // owner es de tipo address
+    }
+
+    function transferTo(uint amount, address to) public isOwner {  // Solo puede ser ejecutada por el propietario
+        require(address(this).balance >= amount);
+        require(to != address(0));   // debe ser una dirección válida de Ethereum
+        to.transfer(amount);
     }
 }
 
